@@ -1,0 +1,11 @@
+your-app/
+├── src/
+│   ├── main.rs           # Main Rust file for Tauri app
+│   ├── screen_capture/   # Screen capture logic
+│   │   ├── mod.rs        # Module file
+│   │   └── ffmpeg.rs     # FFmpeg integration
+│   └── utils/            # Utility functions
+│       └── mod.rs
+├── resources/            # Any static resources, icons, etc.
+├── tauri.conf.json       # Tauri configuration file
+└── Cargo.toml            # Rust project manifest

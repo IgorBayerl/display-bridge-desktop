@@ -16,6 +16,10 @@ tauri-build = { version = "1.5", features = [] }
 tauri = { version = "1.5", features = ["shell-open"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+scrap = "0.5.0"
+vpx-encode = "0.6.2"
+image = "0.24.7"
+ffmpeg = "0.3.0"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
