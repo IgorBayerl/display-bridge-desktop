@@ -14,6 +14,15 @@ use std::io::Write;  // Import the Write trait
 static IS_RECORDING: AtomicBool = AtomicBool::new(false);
 
 
+fn milliseconds_per_frame(fps: u32) -> u64 {
+    if fps == 0 {
+        panic!("Frame rate cannot be zero");
+    }
+    1000 / fps as u64
+}
+
+
+
 fn capture_and_encode() -> Result<(), Box<dyn Error>> {
     IS_RECORDING.store(true, Ordering::SeqCst);
 
@@ -39,6 +48,8 @@ fn capture_and_encode() -> Result<(), Box<dyn Error>> {
 
     let stdin = child.stdin.as_mut().ok_or("Failed to open stdin")?;
 
+    let ms_to_wait = milliseconds_per_frame(15); 
+
     while IS_RECORDING.load(Ordering::SeqCst) {
         match capturer.frame() {
             Ok(frame) => {
@@ -47,7 +58,7 @@ fn capture_and_encode() -> Result<(), Box<dyn Error>> {
                 // Write raw frame data to FFmpeg's stdin
                 stdin.write_all(frame_data)?;
 
-                std::thread::sleep(Duration::from_millis(33));
+                std::thread::sleep(Duration::from_millis(ms_to_wait));
             },
             Err(e) => {
                 eprintln!("Frame capture error: {}", e);
@@ -55,9 +66,6 @@ fn capture_and_encode() -> Result<(), Box<dyn Error>> {
             }
         }
     }
-
-    // Finish writing and close stdin to signal FFmpeg to finalize the video file
-    drop(stdin);
 
     // Wait for FFmpeg to finish
     let _ = child.wait()?;
