@@ -20,6 +20,9 @@ scrap = "0.5.0"
 vpx-encode = "0.6.2"
 image = "0.24.7"
 ffmpeg = "0.3.0"
+tungstenite = "0.21.0"
+tokio-tungstenite = "0.21.0"
+tokio = "1.35.1"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
