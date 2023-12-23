@@ -46,6 +46,12 @@ pub fn stop_recording_cmd() {
     IS_RECORDING.store(false, Ordering::SeqCst);
 }
 
+#[tauri::command]
+pub fn is_recording_cmd() -> bool {
+    IS_RECORDING.load(Ordering::SeqCst)
+}
+
+
 fn record_screen() -> Result<(), String> {
     let mut capturer = initialize_capturer().map_err(|e| e.to_string())?;
     let width = capturer.width() as u32;
@@ -63,3 +69,5 @@ fn record_screen() -> Result<(), String> {
     let _ = ffmpeg.wait().map_err(|e| e.to_string())?;
     Ok(())
 }
+
+

@@ -11,7 +11,7 @@ mod record;
 mod stream;
 
 use tauri::Builder;
-use record::{start_recording_cmd, stop_recording_cmd};
+use record::{start_recording_cmd, stop_recording_cmd, is_recording_cmd};
 // use stream::{start_streaming_cmd, stop_streaming_cmd};
 
 fn main() {
@@ -19,6 +19,7 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             start_recording_cmd,
             stop_recording_cmd,
+            is_recording_cmd,
             // start_streaming_cmd,
             // stop_streaming_cmd
         ])

@@ -65,3 +65,20 @@ static IS_STREAMING: AtomicBool = AtomicBool::new(false);
 pub fn stop_streaming_cmd() {
     IS_STREAMING.store(false, Ordering::SeqCst);
 }
+
+
+
+/// On the record.rs we have
+/// 
+/// 
+/// Start Recording Command
+/// Stop Recording Command
+/// 
+/// function Record Screen
+/// - This function calls the start ffmpeg encoder
+/// - And then saves to a file - ( we need to stream instead of saving )
+/// 
+/// 
+fn doc_string_test(){
+    // TODO
+}
